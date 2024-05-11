@@ -1,8 +1,25 @@
-import { FaCircleChevronRight, FaUser } from "react-icons/fa6";
+import { FaCircleChevronRight} from "react-icons/fa6";
 import { IoLocation } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import PropTypes from 'prop-types'
 
-const FeaturedCard = () => {
+
+
+
+const FeaturedCard = ({ food }) => {
+  const {
+    _id,
+    foodName,
+    foodImage,
+    quantityAvailable,
+    pickupLocation,
+    expiryDateTime,
+    additionalNotes,
+    donatorImage,
+    donatorName,
+  } = food;
+
+  console.log(foodImage);
   return (
     <>
       <div
@@ -13,25 +30,20 @@ const FeaturedCard = () => {
         <figure>
           <img
             className="h-[200px] w-full rounded-2xl"
-            src={''}
-            alt="spot-image"
+            src={foodImage}
+            alt="Food image"
           />
         </figure>
         <div className="card-body p-0 space-y-1">
-          <h2 className="gap-2 text-[18px] font-semibold mt-3">
-            Title
-          </h2>
-          <p>
-            <span className="text-[18px] font-semibold mt-3">
-              Country Name:
-            </span>{" "}
-            Paragraph
-          </p>
-          <div className="flex justify-between mt-4">
+          <h2 className="gap-2 text-[18px] font-semibold mt-3">{foodName}</h2>
+
+          <div className=" mt-4">
             <p className="flex items-center gap-2 text-[18px] font-semibold">
               {" "}
-              <IoLocation className="text-[#32CD32]"></IoLocation> {location}
+              <IoLocation className="text-[#32CD32]"></IoLocation> Pickup
+              Location :
             </p>
+            <p className="text-[16px] font-medium ml-7"> {pickupLocation}</p>
           </div>
           <hr />
 
@@ -39,30 +51,41 @@ const FeaturedCard = () => {
             <li className="flex items-center gap-2">
               {" "}
               <FaCircleChevronRight className="text-[#32CD32]"></FaCircleChevronRight>
-              Li 
+              <span>Food Quantity :</span> {quantityAvailable}
             </li>
             <li className="flex items-center gap-2">
               {" "}
               <FaCircleChevronRight className="text-[#32CD32]"></FaCircleChevronRight>
-              Li
+              <span>Expire in : </span> {expiryDateTime}
             </li>
-            <li className="flex items-center gap-2">
+            <li className="list-none">
               {" "}
-              <FaCircleChevronRight className="text-[#32CD32]"></FaCircleChevronRight>
-              li 
+              <span className="flex items-center gap-2">
+                <FaCircleChevronRight className="text-[#32CD32]"></FaCircleChevronRight>
+                Additional Note :{" "}
+              </span>{" "}
+              <div className="ml-6">{additionalNotes}</div>
             </li>
           </ul>
 
           <hr />
+          
           <div className="flex gap-6 md:flex-col lg:flex-row md:gap-1">
-            <div className="flex gap-2 items-center text-[18px] font-semibold mt-3">
-              <FaUser className="text-[#32CD32]"></FaUser>
-              <p> Paragraph </p>
+            <div className="flex gap-2 items-center text-[18px] font-semibold">
+              <div className="avatar">
+                <div className="w-12 rounded-full">
+                  <img src={donatorImage} />
+                </div>
+              </div>
+              <div>
+              <p className="text-[14px] font-medium">Donator :</p>
+              <p> {donatorName}</p>
+              </div>
             </div>
           </div>
           <div className="card-actions mx-auto mt-4">
             <Link
-              to={`/details`}
+              to={`/details/${_id}`}
               className="relative px-5 py-2 font-medium text-green-600 group"
             >
               <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:skew-x-[18deg]"></span>
@@ -75,5 +98,9 @@ const FeaturedCard = () => {
     </>
   );
 };
+
+FeaturedCard.propTypes = {
+  food : PropTypes.object.isRequired
+}
 
 export default FeaturedCard;

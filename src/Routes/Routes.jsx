@@ -4,6 +4,9 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../pages/Register/Register";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import FoodDetails from "../pages/FoodDetails/FoodDetails";
+import PrivateRouts from "../Components/PrivateRouts";
+
 
 const router = createBrowserRouter([
     {
@@ -14,7 +17,10 @@ const router = createBrowserRouter([
         {
             path: '/',
             element: <Home></Home>,
-            loader: () => fetch('/featuredFoods?email=admin@gmail.com')
+        },
+        {
+          path: '/details/:id',
+          element: <PrivateRouts><FoodDetails></FoodDetails></PrivateRouts>
         },
         {
             path: '/login',
