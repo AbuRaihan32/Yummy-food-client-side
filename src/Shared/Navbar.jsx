@@ -4,7 +4,7 @@ import { Link, NavLink } from "react-router-dom";
 import { PuffLoader } from "react-spinners";
 
 const Navbar = () => {
-  const user = false;
+  const user = true;
 
   const signOutBtnHandler = () => {
     alert("Sign Out successfully");
