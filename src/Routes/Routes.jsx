@@ -7,6 +7,7 @@ import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import FoodDetails from "../pages/FoodDetails/FoodDetails";
 import PrivateRouts from "../Components/PrivateRouts";
 import AddFood from "../pages/AddFood/AddFood";
+import AvailableFoods from "../pages/AvailableFoods/AvailableFoods";
 
 
 const router = createBrowserRouter([
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         {
           path: '/addFood',
           element: <PrivateRouts><AddFood></AddFood></PrivateRouts>
+        },
+        {
+          path: '/availableFoods',
+          element: <AvailableFoods></AvailableFoods>
         },
         {
             path: '/login',

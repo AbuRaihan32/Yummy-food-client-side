@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const AddFood = () => {
-    const axiosSecure = useAxiosSecure();
+  const axiosSecure = useAxiosSecure();
   const user = true;
 
   const { register, handleSubmit } = useForm();
@@ -23,23 +23,21 @@ const AddFood = () => {
     } = data;
 
     const newFood = {
-      name,
-      image,
-      quantity,
-      location,
-      date,
-      notes,
-      status,
+      foodName: name,
+      foodImage: image,
+      quantityAvailable: quantity,
+      pickupLocation: location,
+      expiryDateTime: date,
+      additionalNotes: notes,
+      foodStatus: status,
       donatorImage,
       donatorName,
-      donatorEmail
+      donatorEmail,
     };
 
-    axiosSecure.post('/addFood', newFood)
-    .then(res =>{
-        alert(res.data)
-    })
-    
+    axiosSecure.post("/addFood", newFood).then((res) => {
+      alert(res.data);
+    });
   };
 
   return (
@@ -178,6 +176,7 @@ const AddFood = () => {
                             type="text"
                             className="w-full py-2 pl-3 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                             placeholder="Food Status"
+                            defaultValue={"Available"}
                             {...register("status")}
                           />
                         </div>
