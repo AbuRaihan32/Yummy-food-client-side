@@ -1,32 +1,43 @@
 import { IoIosArrowDown } from "react-icons/io";
 import AvailableFoodCard from "./AvailableFoodCard";
 import { useEffect, useState } from "react";
-import useAxiosSecure from '../../Hooks/useAxiosSecure'
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { FaSearch } from "react-icons/fa";
 
 const AvailableFoods = () => {
-    const axiosSecure = useAxiosSecure();
-    const [availableFoods, setAvailableFoods] = useState([]);
+  const axiosSecure = useAxiosSecure();
+  const [availableFoods, setAvailableFoods] = useState([]);
+  const [search, setSearch] = useState("");
 
-    useEffect(()=>{
-        axiosSecure.get('/availableFoods?foodStatus=Available')
-        .then(res => setAvailableFoods(res.data))
-    }, [axiosSecure])
+  useEffect(() => {
+    axiosSecure
+      .get("/availableFoods?foodStatus=Available")
+      .then((res) => setAvailableFoods(res.data));
+  }, [axiosSecure]);
 
-
-
-    const handleShortBtn = (e) =>{
-        const selectedValue = e.target.value;
-        let sortedFoods = [...availableFoods];
-        if(selectedValue === 'ascending'){
-            sortedFoods.sort((a, b) => a.quantityAvailable - b.quantityAvailable);  
-        }else if(selectedValue === 'descending'){
-            sortedFoods.sort((a,b)=> b.quantityAvailable - a.quantityAvailable);
-        }
-        setAvailableFoods(sortedFoods)
+  const handleShortBtn = (e) => {
+    const selectedValue = e.target.value;
+    let sortedFoods = [...availableFoods];
+    if (selectedValue === "ascending") {
+      sortedFoods.sort(
+        (a, b) => new Date(a.expiryDateTime) - new Date(b.expiryDateTime)
+      );
+    } else if (selectedValue === "descending") {
+      sortedFoods.sort(
+        (a, b) => new Date(b.expiryDateTime) - new Date(a.expiryDateTime)
+      );
     }
+    setAvailableFoods([...sortedFoods]);
+  };
 
+  const handleSearch = (e) => {
+    const searchedWord = e.target.value;
+    setSearch(searchedWord);
+  };
 
+  const filteredFoods = availableFoods.filter((food) =>
+    food.foodName.toLowerCase().includes(search.toLowerCase())
+  );
 
   return (
     <div
@@ -63,24 +74,44 @@ const AvailableFoods = () => {
                   className="text-xl font-bold border-2 border-[#32Cd32] text-gray-600 h-14 w-[300px] pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none rounded-full"
                 >
                   <option>Sort By:</option>
-                  <option value="ascending">Quantity Low to High</option>
-                  <option value="descending">Quantity High to Low</option>
+                  <option value="ascending">Earliest Expiry Date</option>
+                  <option value="descending">Latest Expiry Date</option>
                 </select>
               </div>
 
               {/* search option */}
               <div className="relative inline-flex self-center ">
-                <div className="text-white text-xl bg-[#32Cd32] absolute top-2 right-3 m-2 pointer-events-none p-1 rounded">
+                <div
+                  className={` ${
+                    search.length > 0 ? "hidden" : ""
+                  } text-white text-xl bg-[#32Cd32] absolute top-2 right-3 m-2 pointer-events-none p-1 rounded`}
+                >
                   <FaSearch></FaSearch>
                 </div>
-                <input className="text-xl font-bold border-2 border-[#32Cd32] text-gray-600 h-14 w-[300px] pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none rounded-full" type="search" placeholder="Search" name="" id="" />
+                <input
+                  onChange={handleSearch}
+                  className="text-xl font-bold border-2 border-[#32Cd32] text-gray-600 h-14 w-[300px] pl-5 pr-5 bg-white hover:border-gray-400 focus:outline-none appearance-none rounded-full"
+                  type="search"
+                  placeholder="Search"
+                  name=""
+                  id=""
+                />
               </div>
             </div>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 w-[95%] mx-auto">
-              {availableFoods.map((data) => (
-                <AvailableFoodCard key={data._id} food={data}></AvailableFoodCard>
-              ))}
+              {filteredFoods.length < 1 ? (
+                <div className="text-white text-2xl flex items-center justify-center col-span-3">
+                  <p>No available foods match your search criteria.</p>
+                </div>
+              ) : (
+                filteredFoods.map((data) => (
+                  <AvailableFoodCard
+                    key={data._id}
+                    food={data}
+                  ></AvailableFoodCard>
+                ))
+              )}
             </div>
           </div>
         )}
