@@ -32,7 +32,7 @@ const Navbar = () => {
               ? "border border-[#32CD32] hover:bg-[#008000] rounded-md py-[7px] px-3"
               : "py-[6px] px-3"
           }
-          to={"/all_spot"}
+          to={"/availableFoods"}
         >
           Available Foods
         </NavLink>
@@ -45,7 +45,7 @@ const Navbar = () => {
                 ? "border border-[#32CD32] hover:bg-[#008000] rounded-md py-[7px] px-3"
                 : "py-[6px] px-3"
             }
-            to={"/add_spot"}
+            to={"/addFood"}
           >
             Add Food
           </NavLink>
@@ -60,7 +60,7 @@ const Navbar = () => {
                 ? "border border-[#32CD32] hover:bg-[#008000] rounded-md py-[7px] px-3"
                 : "py-[6px] px-3"
             }
-            to={"/my_list"}
+            to={"/manageFoods"}
           >
             Manage My Foods
           </NavLink>
@@ -75,7 +75,7 @@ const Navbar = () => {
                 ? "border border-[#32CD32] hover:bg-[#008000] rounded-md py-[7px] px-3"
                 : "py-[6px] px-3"
             }
-            to={"/my_list"}
+            to={"/myFoodReq"}
           >
             My Food Request
           </NavLink>
