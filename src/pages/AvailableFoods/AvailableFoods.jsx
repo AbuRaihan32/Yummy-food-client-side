@@ -16,7 +16,14 @@ const AvailableFoods = () => {
 
 
     const handleShortBtn = (e) =>{
-        console.log(e)
+        const selectedValue = e.target.value;
+        let sortedFoods = [...availableFoods];
+        if(selectedValue === 'ascending'){
+            sortedFoods.sort((a, b) => a.quantityAvailable - b.quantityAvailable);  
+        }else if(selectedValue === 'descending'){
+            sortedFoods.sort((a,b)=> b.quantityAvailable - a.quantityAvailable);
+        }
+        setAvailableFoods(sortedFoods)
     }
 
 
@@ -53,11 +60,11 @@ const AvailableFoods = () => {
                 </div>
                 <select
                   onChange={handleShortBtn}
-                  className="text-2xl font-bold border-2 border-[#32Cd32] text-gray-600 h-14 w-[300px] pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none rounded-full"
+                  className="text-xl font-bold border-2 border-[#32Cd32] text-gray-600 h-14 w-[300px] pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none rounded-full"
                 >
                   <option>Sort By:</option>
-                  <option value="ascending">Cost Low to High</option>
-                  <option value="descending">Cost High to Low</option>
+                  <option value="ascending">Quantity Low to High</option>
+                  <option value="descending">Quantity High to Low</option>
                 </select>
               </div>
 
@@ -66,7 +73,7 @@ const AvailableFoods = () => {
                 <div className="text-white text-xl bg-[#32Cd32] absolute top-2 right-3 m-2 pointer-events-none p-1 rounded">
                   <FaSearch></FaSearch>
                 </div>
-                <input className="text-2xl font-bold border-2 border-[#32Cd32] text-gray-600 h-14 w-[300px] pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none rounded-full" type="search" placeholder="Search" name="" id="" />
+                <input className="text-xl font-bold border-2 border-[#32Cd32] text-gray-600 h-14 w-[300px] pl-5 pr-10 bg-white hover:border-gray-400 focus:outline-none appearance-none rounded-full" type="search" placeholder="Search" name="" id="" />
               </div>
             </div>
 
