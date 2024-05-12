@@ -50,12 +50,12 @@ const AvailableFoods = () => {
       <div className="min-w-screen min-h-screen rounded-b-3xl bg-gray-900 bg-opacity-80 pt-32 pb-24">
         {availableFoods?.length < 1 ? (
           <div className="w-full h-[500px] flex items-center justify-center text-[#fcfcfc] font-semibold text-4xl">
-            <div>You have not added any spots yet.</div>
+            <div>No food available.</div>
           </div>
         ) : (
           <div>
             <h1 className="text-4xl font-bold mb-7 text-white text-center">
-              All Tourists Spots
+              Available Foods
             </h1>
             <p className="px-5 md:mx-32 text-white mb-7  text-center">
               Almost all people in the world have a dream to have a home with a

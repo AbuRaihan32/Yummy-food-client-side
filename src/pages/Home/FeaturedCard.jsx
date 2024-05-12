@@ -1,12 +1,12 @@
-import { FaCircleChevronRight} from "react-icons/fa6";
+import { FaCircleChevronRight } from "react-icons/fa6";
 import { IoLocation } from "react-icons/io5";
-import { Link } from "react-router-dom";
-import PropTypes from 'prop-types'
-
-
-
+import { Link, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const FeaturedCard = ({ food }) => {
+  const location = useLocation();
+
+
   const {
     _id,
     foodName,
@@ -17,6 +17,7 @@ const FeaturedCard = ({ food }) => {
     additionalNotes,
     donatorImage,
     donatorName,
+    foodStatus,
   } = food;
 
   console.log(foodImage);
@@ -35,7 +36,12 @@ const FeaturedCard = ({ food }) => {
           />
         </figure>
         <div className="card-body p-0 space-y-1">
-          <h2 className="gap-2 text-[18px] font-semibold mt-3">{foodName}</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="gap-2 text-[18px] font-semibold mt-3">{foodName}</h2>
+            <h2 className="gap-2 text-[18px] font-semibold mt-4 text-[#49e249] px-3 py-1 border border-[#32CD32] rounded-full ">
+              {foodStatus}
+            </h2>
+          </div>
 
           <div className=" mt-4">
             <p className="flex items-center gap-2 text-[18px] font-semibold">
@@ -69,7 +75,7 @@ const FeaturedCard = ({ food }) => {
           </ul>
 
           <hr />
-          
+
           <div className="flex gap-6 md:flex-col lg:flex-row md:gap-1">
             <div className="flex gap-2 items-center text-[18px] font-semibold">
               <div className="avatar">
@@ -78,14 +84,15 @@ const FeaturedCard = ({ food }) => {
                 </div>
               </div>
               <div>
-              <p className="text-[14px] font-medium">Donator :</p>
-              <p> {donatorName}</p>
+                <p className="text-[14px] font-medium">Donator :</p>
+                <p> {donatorName}</p>
               </div>
             </div>
           </div>
           <div className="card-actions mx-auto mt-4">
             <Link
               to={`/details/${_id}`}
+              state={location.pathname}
               className="relative px-5 py-2 font-medium text-green-600 group"
             >
               <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:skew-x-[18deg]"></span>
@@ -100,7 +107,7 @@ const FeaturedCard = ({ food }) => {
 };
 
 FeaturedCard.propTypes = {
-  food : PropTypes.object.isRequired
-}
+  food: PropTypes.object.isRequired,
+};
 
 export default FeaturedCard;

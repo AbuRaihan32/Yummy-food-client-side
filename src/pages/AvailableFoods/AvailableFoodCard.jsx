@@ -1,10 +1,13 @@
 import { FaCircleChevronRight } from "react-icons/fa6";
 import { IoLocation } from "react-icons/io5";
-import { Link } from "react-router-dom";
-import PropTypes from 'prop-types';
+import { Link, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
+
+const AvailableFoodCard = ({ food }) => {
 
 
-const AvailableFoodCard = ({food}) => {
+  const location = useLocation();
+  console.log(location)
   const {
     _id,
     foodName,
@@ -15,6 +18,7 @@ const AvailableFoodCard = ({food}) => {
     additionalNotes,
     donatorImage,
     donatorName,
+    foodStatus
   } = food;
   return (
     <>
@@ -31,7 +35,12 @@ const AvailableFoodCard = ({food}) => {
           />
         </figure>
         <div className="card-body p-0 space-y-1">
-          <h2 className="gap-2 text-[18px] font-semibold mt-3">{foodName}</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="gap-2 text-[18px] font-semibold mt-3">{foodName}</h2>
+            <h2 className="gap-2 text-[18px] font-semibold mt-4 text-[#49e249] px-3 py-1 border border-[#32CD32] rounded-full ">
+              {foodStatus}
+            </h2>
+          </div>
 
           <div className=" mt-4">
             <p className="flex items-center gap-2 text-[18px] font-semibold">
@@ -82,6 +91,7 @@ const AvailableFoodCard = ({food}) => {
           <div className="card-actions mx-auto mt-4">
             <Link
               to={`/details/${_id}`}
+              state={location.pathname}
               className="relative px-5 py-2 font-medium text-green-600 group"
             >
               <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:skew-x-[18deg]"></span>
@@ -95,8 +105,7 @@ const AvailableFoodCard = ({food}) => {
   );
 };
 
-
 AvailableFoodCard.propTypes = {
-    food: PropTypes.object.isRequired
-}
+  food: PropTypes.object.isRequired,
+};
 export default AvailableFoodCard;
