@@ -2,9 +2,11 @@ import { BiLogInCircle, BiLogOutCircle } from "react-icons/bi";
 import { RiEye2Line } from "react-icons/ri";
 import { Link, NavLink } from "react-router-dom";
 import { PuffLoader } from "react-spinners";
+import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
-  const user = true;
+  const {user} = useAuth();
+  console.log(user)
 
   const signOutBtnHandler = () => {
     alert("Sign Out successfully");
