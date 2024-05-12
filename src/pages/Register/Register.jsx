@@ -5,10 +5,12 @@ import { BiLogInCircle } from "react-icons/bi";
 import { FaEye } from "react-icons/fa";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { Link } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 const Register = () => {
+  const { createUser } = useAuth();
   const [show, setShow] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const {
     register,
     handleSubmit,
@@ -16,9 +18,9 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const {FastName, LastName, image, email, password } = data;
+    const { FastName, LastName, image, email, password } = data;
 
-    console.log(FastName, LastName, image, email, password)
+    console.log(FastName, LastName, image, email, password);
 
     if (!/[A-Z]/.test(password)) {
       return setError("Password must contain an uppercase letter.");
@@ -31,6 +33,11 @@ const Register = () => {
       return setError("Password must be at least 6 character");
     }
     setError("");
+
+    // create User
+    createUser(email, password)
+      .then((result) => console.log(result.user))
+      .catch((err) => console.log(err.message));
   };
 
   return (
