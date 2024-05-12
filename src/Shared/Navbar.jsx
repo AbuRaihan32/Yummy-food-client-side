@@ -75,7 +75,7 @@ const Navbar = () => {
                 ? "border border-[#32CD32] hover:bg-[#008000] rounded-md py-[7px] px-3"
                 : "py-[6px] px-3"
             }
-            to={"/myFoodReq"}
+            to={"/myRequest"}
           >
             My Food Request
           </NavLink>
