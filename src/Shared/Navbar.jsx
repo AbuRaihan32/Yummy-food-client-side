@@ -5,17 +5,16 @@ import { PuffLoader } from "react-spinners";
 import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
-  const {user, logOut} = useAuth();
-  console.log(user)
+  const { user, logOut } = useAuth();
 
   const signOutBtnHandler = () => {
     logOut()
-    .then(() => {
-      alert("Sign Out successfully");
-    })
-    .catch(err =>{
-      console.log(err.message)
-    })
+      .then(() => {
+        alert("Sign Out successfully");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   };
 
   const NavLinks = (
@@ -162,10 +161,7 @@ const Navbar = () => {
         {user ? (
           <>
             <div className="relative">
-              <div
-                title={`${user.displayName}`}
-                className="avatar mr-5 z-20 flex gap-4"
-              >
+              <div className="avatar mr-5 z-20 flex gap-4">
                 <div>
                   <label className="swap swap-rotate">
                     {/* this hidden checkbox controls the state */}
@@ -194,7 +190,10 @@ const Navbar = () => {
                     </svg>
                   </label>
                 </div>
-                <div className="w-10 rounded-full ring ring-[#32CD32] ring-offset-base-100 ring-offset-2">
+                <div
+                  title={`${user.displayName}`}
+                  className="w-10 rounded-full ring ring-[#32CD32] ring-offset-base-100 ring-offset-2"
+                >
                   <img
                     src={
                       user?.photoURL ? user.photoURL : "/public/icons8-user.gif"

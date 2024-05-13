@@ -4,8 +4,11 @@ import { useEffect, useState } from "react";
 import { IoLocation } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import { FaCircleChevronRight } from "react-icons/fa6";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const FoodDetails = () => {
+  const { user } = useAuth();
   const { id } = useParams();
   const [food, setFood] = useState([]);
   const axiosSecure = useAxiosSecure();
@@ -27,14 +30,38 @@ const FoodDetails = () => {
     foodStatus,
   } = food;
 
-  const onSubmit = (data) => {
-    console.log(data);
-  };
 
+  // ! load food
   useEffect(() => {
     axiosSecure.get(`/singleFood/${id}`).then((data) => setFood(data.data));
   }, [axiosSecure, id]);
+  
 
+  // ! handle request button
+  const handleRequest = () => {
+    if (user?.email === donatorEmail) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "You cannot request the food you added!"
+      });
+    } else {
+      document.getElementById("my_modal_4").showModal();
+    }
+  };
+
+  
+  // ! handle Request Confirm Button
+  const onSubmit = (data) => {
+    const { requestDate, userEmail } = data;
+    console.log(requestDate, userEmail);
+  };
+
+
+
+
+
+  
   return (
     <>
       <div className="hero min-h-screen bg-base-200 rounded-2xl">
@@ -99,9 +126,7 @@ const FoodDetails = () => {
             <div className="mt-5">
               <button
                 className="text-xl text-white relative px-5 py-2 font-semibold group mr-20"
-                onClick={() =>
-                  document.getElementById("my_modal_4").showModal()
-                }
+                onClick={handleRequest}
               >
                 <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-[18deg] bg-[#188d18] group-hover:bg-[#32CC32] group-hover:skew-x-[18deg]"></span>
                 <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-[18deg] bg-[#32CC32] group-hover:bg-[#188d18] group-hover:-skew-x-[18deg]"></span>
@@ -139,7 +164,7 @@ const FoodDetails = () => {
                     type="text"
                     className="w-full py-2 pl-3 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                     value={foodName}
-                    {...register("name")}
+                    {...register("foodName")}
                   />
                 </div>
               </div>
@@ -151,7 +176,7 @@ const FoodDetails = () => {
                     type="text"
                     className="w-full pl-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                     value={foodImage}
-                    {...register("image")}
+                    {...register("foodImage")}
                   />
                 </div>
               </div>
@@ -166,7 +191,7 @@ const FoodDetails = () => {
                     type="text"
                     className="w-full py-2 pl-3 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                     value={_id}
-                    {...register("quantity")}
+                    {...register("foodID")}
                   />
                 </div>
               </div>
@@ -180,7 +205,7 @@ const FoodDetails = () => {
                     type="text"
                     className="w-full pl-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                     value={pickupLocation}
-                    {...register("location")}
+                    {...register("pickupLocation")}
                   />
                 </div>
               </div>
@@ -197,7 +222,7 @@ const FoodDetails = () => {
                     type="text"
                     className="w-full py-2 pl-3 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                     value={expiryDateTime}
-                    {...register("date")}
+                    {...register("expiryDateTime")}
                   />
                 </div>
               </div>
@@ -210,7 +235,7 @@ const FoodDetails = () => {
                     type="text"
                     className="w-full py-2 pl-3 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                     value={additionalNotes}
-                    {...register("notes")}
+                    {...register("additionalNotes")}
                   />
                 </div>
               </div>
@@ -220,28 +245,28 @@ const FoodDetails = () => {
             <div className="md:flex gap-4">
               <div className="md:w-1/2 mb-5">
                 <label className="text-xs font-semibold px-1">
-                Food Donator Name
+                  Food Donator Name
                 </label>
                 <div className="flex flex-col">
                   <input
                     type="text"
                     className="w-full py-2 pl-3 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                     value={donatorName}
-                    {...register("status")}
+                    {...register("donatorName")}
                   />
                 </div>
               </div>
 
               <div className="md:w-1/2 mb-5">
                 <label className="text-xs font-semibold px-1">
-                Food Donator email
+                  Food Donator email
                 </label>
                 <div className="flex">
                   <input
                     type="text"
                     className="w-full pl-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                     value={donatorEmail}
-                    {...register("donatorImage")}
+                    {...register("donatorEmail")}
                   />
                 </div>
               </div>
@@ -251,28 +276,34 @@ const FoodDetails = () => {
             <div className="md:flex gap-4">
               <div className="md:w-1/2 mb-5">
                 <label className="text-xs font-semibold px-1">
-                Request Date
+                  Request Date
                 </label>
                 <div className="flex">
                   <input
                     type="text"
                     className="w-full pl-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                    value={new Date().toLocaleDateString('en-US', {year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true})}
-                    {...register("donatorName")}
+                    value={new Date().toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "numeric",
+                      day: "numeric",
+                      hour: "numeric",
+                      minute: "numeric",
+                      second: "numeric",
+                      hour12: true,
+                    })}
+                    {...register("requestDate")}
                   />
                 </div>
               </div>
 
               <div className="md:w-1/2 mb-5">
-                <label className="text-xs font-semibold px-1">
-                User Email
-                </label>
+                <label className="text-xs font-semibold px-1">User Email</label>
                 <div className="flex">
                   <input
                     type="text"
                     className="w-full pl-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
-                    value={'user@@@@@@@@@@'}
-                    {...register("donatorEmail")}
+                    value={user.email}
+                    {...register("userEmail")}
                   />
                 </div>
               </div>

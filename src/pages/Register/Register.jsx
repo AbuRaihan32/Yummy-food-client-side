@@ -4,11 +4,12 @@ import { useForm } from "react-hook-form";
 import { BiLogInCircle } from "react-icons/bi";
 import { FaEye } from "react-icons/fa";
 import { RiEyeCloseFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 
 const Register = () => {
-  const { createUser } = useAuth();
+  const { createUser, updateUser, logOut } = useAuth();
+  const navigate = useNavigate();
   const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const {
@@ -19,8 +20,7 @@ const Register = () => {
 
   const onSubmit = (data) => {
     const { FastName, LastName, image, email, password } = data;
-
-    console.log(FastName, LastName, image, email, password);
+    const name = FastName + LastName;
 
     if (!/[A-Z]/.test(password)) {
       return setError("Password must contain an uppercase letter.");
@@ -36,7 +36,19 @@ const Register = () => {
 
     // create User
     createUser(email, password)
-      .then((result) => console.log(result.user))
+      .then(() => {
+        updateUser(name, image)
+          .then(() => {})
+          .catch(() => {});
+
+        logOut()
+          .then(() => {
+            navigate("/login");
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+      })
       .catch((err) => console.log(err.message));
   };
 

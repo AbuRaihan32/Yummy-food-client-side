@@ -7,7 +7,6 @@ const AvailableFoodCard = ({ food }) => {
 
 
   const location = useLocation();
-  console.log(location)
   const {
     _id,
     foodName,

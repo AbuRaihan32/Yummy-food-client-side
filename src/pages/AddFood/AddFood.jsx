@@ -1,12 +1,18 @@
 import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAuth from "../../Hooks/useAuth";
 
 const AddFood = () => {
   const axiosSecure = useAxiosSecure();
-  const user = true;
+  const {user} = useAuth();
+  console.log(user)
 
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const onSubmit = (data) => {
     const {
@@ -16,10 +22,7 @@ const AddFood = () => {
       location,
       date,
       notes,
-      status,
-      donatorImage,
-      donatorName,
-      donatorEmail,
+      status
     } = data;
 
     const newFood = {
@@ -30,9 +33,9 @@ const AddFood = () => {
       expiryDateTime: date,
       additionalNotes: notes,
       foodStatus: status,
-      donatorImage,
-      donatorName,
-      donatorEmail,
+      donatorImage : user?.photoURL,
+      donatorName : user?.displayName,
+      donatorEmail : user?.email,
     };
 
     axiosSecure.post("/addFood", newFood).then((res) => {
@@ -84,8 +87,13 @@ const AddFood = () => {
                             type="text"
                             className="w-full py-2 pl-3 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                             placeholder="Food Name"
-                            {...register("name")}
+                            {...register("name", { required: true })}
                           />
+                          {errors.name && (
+                            <span className="text-red-500 font-bold pl-3">
+                              This field is required
+                            </span>
+                          )}
                         </div>
                       </div>
 
@@ -93,13 +101,18 @@ const AddFood = () => {
                         <label className="text-xs font-semibold px-1">
                           Photo URL
                         </label>
-                        <div className="flex">
+                        <div className="flex flex-col">
                           <input
                             type="text"
-                            className="w-full pl-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
+                            className="w-full py-2 pl-3 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                             placeholder="Photo URL"
-                            {...register("image")}
+                            {...register("image", { required: true })}
                           />
+                          {errors.image && (
+                            <span className="text-red-500 font-bold pl-3">
+                              This field is required
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -115,8 +128,13 @@ const AddFood = () => {
                             type="text"
                             className="w-full py-2 pl-3 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                             placeholder="Food Quantity"
-                            {...register("quantity")}
+                            {...register("quantity", { required: true })}
                           />
+                          {errors.quantity && (
+                            <span className="text-red-500 font-bold pl-3">
+                              This field is required
+                            </span>
+                          )}
                         </div>
                       </div>
 
@@ -124,13 +142,18 @@ const AddFood = () => {
                         <label className="text-xs font-semibold px-1">
                           Pickup Location
                         </label>
-                        <div className="flex">
+                        <div className="flex flex-col">
                           <input
                             type="text"
                             className="w-full pl-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                             placeholder="Pickup Location"
-                            {...register("location")}
+                            {...register("location", { required: true })}
                           />
+                          {errors.location && (
+                            <span className="text-red-500 font-bold pl-3">
+                              This field is required
+                            </span>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -146,8 +169,13 @@ const AddFood = () => {
                             type="text"
                             className="w-full py-2 pl-3 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                             placeholder="Expired Date"
-                            {...register("date")}
+                            {...register("date", { required: true })}
                           />
+                          {errors.location && (
+                            <span className="text-red-500 font-bold pl-3">
+                              This field is required
+                            </span>
+                          )}
                         </div>
                       </div>
                       <div className="md:w-1/2 mb-5">
@@ -186,11 +214,12 @@ const AddFood = () => {
                         <label className="text-xs font-semibold px-1">
                           Donator Image
                         </label>
-                        <div className="flex">
+                        <div className="flex flex-col">
                           <input
                             type="text"
                             className="w-full pl-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                             placeholder="Donator photo URL"
+                            value={user?.photoURL}
                             {...register("donatorImage")}
                           />
                         </div>
@@ -203,7 +232,7 @@ const AddFood = () => {
                         <label className="text-xs font-semibold px-1">
                           Donator Name
                         </label>
-                        <div className="flex">
+                        <div className="flex flex-col">
                           <input
                             type="text"
                             className="w-full pl-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
@@ -218,13 +247,13 @@ const AddFood = () => {
                         <label className="text-xs font-semibold px-1">
                           Donator Email
                         </label>
-                        <div className="flex">
+                        <div className="flex flex-col">
                           <input
                             type="text"
                             className="w-full pl-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                             value={user?.email}
                             placeholder="Donator Email"
-                            {...register("donatorEmail")}
+                            {...register("donatorEmail" , {required: true})}
                           />
                         </div>
                       </div>

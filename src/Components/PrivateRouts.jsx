@@ -1,11 +1,17 @@
 import { Navigate, useLocation } from "react-router-dom";
 import PropTypes from 'prop-types'
 import useAuth from "../Hooks/useAuth";
+import { PuffLoader } from "react-spinners";
 
 
 const PrivateRouts = ({children}) => {
     const location = useLocation();
-    const {user} = useAuth();
+    const {user, loading} = useAuth();
+
+    if(loading){
+        return <div className="w-full h-[200px] flex items-center justify-center"><PuffLoader color="#32cd32"></PuffLoader></div>
+    }
+
     if(user){
         return children
     }

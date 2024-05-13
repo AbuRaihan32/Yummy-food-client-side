@@ -38,7 +38,7 @@ const Login = () => {
     setError("");
 
     // sign in user 
-    signInUser()
+    signInUser(email, password)
     .then(result => {
       console.log(result.user)
       navigate(location?.state ? location?.state : '/')

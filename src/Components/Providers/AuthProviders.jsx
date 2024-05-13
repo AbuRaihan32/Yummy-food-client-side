@@ -6,9 +6,11 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../../Firebase/Firebase.init";
+import PropTypes from 'prop-types';
 
 export const AuthContext = createContext();
 
@@ -42,6 +44,13 @@ const AuthProviders = ({ children }) => {
     return signInWithPopup(auth, githubProvider);
   };
 
+  // ! Update User
+  const updateUser = (name, image) => {
+    return updateProfile(auth.currentUser, {
+      displayName: name, photoURL: image,
+    });
+  };
+
   // ! sign Out
   const logOut = () => {
     setLoading(true);
@@ -67,11 +76,16 @@ const AuthProviders = ({ children }) => {
     githubLogin,
     logOut,
     signInUser,
+    updateUser,
   };
 
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
 };
+
+AuthProviders.propTypes = {
+  children: PropTypes.node,
+}
 
 export default AuthProviders;

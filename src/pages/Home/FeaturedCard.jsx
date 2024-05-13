@@ -20,7 +20,6 @@ const FeaturedCard = ({ food }) => {
     foodStatus,
   } = food;
 
-  console.log(foodImage);
   return (
     <>
       <div
