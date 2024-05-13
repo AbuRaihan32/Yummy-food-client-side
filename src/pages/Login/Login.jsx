@@ -4,35 +4,66 @@ import { useForm } from "react-hook-form";
 import { BiLogInCircle } from "react-icons/bi";
 import { FaEye, FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { RiEyeCloseFill } from "react-icons/ri";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
 const Login = () => {
-    const [error, setError] = useState('')
-    const [show, setShow] = useState(false);
-
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm()
+  const { googleLogin, githubLogin , signInUser} = useAuth();
+  const [error, setError] = useState("");
+  const [show, setShow] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate()
+  console.log(location)
 
 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-const onSubmit = (data) =>{
-    const {email, password} = data;
+  const onSubmit = (data) => {
+    const { email, password } = data;
     console.log(email, password);
     if (!/[A-Z]/.test(password)) {
-        return setError('Password must contain an uppercase letter.')
+      return setError("Password must contain an uppercase letter.");
     }
 
     if (!/[a-z]/.test(password)) {
-        return setError('Password must contain a lowercase letter.')
+      return setError("Password must contain a lowercase letter.");
     }
     if (password.length < 6) {
-        return setError('Password must be at least 6 character')
+      return setError("Password must be at least 6 character");
     }
-    setError('')
-}
+    setError("");
+
+    // sign in user 
+    signInUser()
+    .then(result => {
+      console.log(result.user)
+      navigate(location?.state ? location?.state : '/')
+    })
+    .catch(err => console.log(err.message))
+  };
+
+  const googleBtnHandle = () => {
+    googleLogin()
+      .then((result) => {
+        console.log(result.user);
+        navigate(location?.state ? location?.state : '/')
+        alert("google logged in");
+      })
+      .catch((err) => console.log(err.message));
+  };
+  const githubBtnHandle = () => {
+    githubLogin()
+      .then((result) => {
+        console.log(result.user);
+        navigate(location?.state ? location?.state : '/')
+        alert("google logged in");
+      })
+      .catch((err) => console.log(err.message));
+  };
 
   return (
     <>
@@ -332,7 +363,7 @@ const onSubmit = (data) =>{
                 </div>
                 <div className="flex justify-center space-x-4">
                   <button
-                    // onClick={googleBtnHandle}
+                    onClick={googleBtnHandle}
                     aria-label="Log in with Google"
                     className="p-3 rounded-sm"
                   >
@@ -346,7 +377,7 @@ const onSubmit = (data) =>{
                     <FaFacebook></FaFacebook>
                   </button>
                   <button
-                    // onClick={githubBtnHandle}
+                    onClick={githubBtnHandle}
                     aria-label="Log in with GitHub"
                     className="p-3 rounded-sm"
                   >

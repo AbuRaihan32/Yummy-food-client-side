@@ -5,11 +5,17 @@ import { PuffLoader } from "react-spinners";
 import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
-  const {user} = useAuth();
+  const {user, logOut} = useAuth();
   console.log(user)
 
   const signOutBtnHandler = () => {
-    alert("Sign Out successfully");
+    logOut()
+    .then(() => {
+      alert("Sign Out successfully");
+    })
+    .catch(err =>{
+      console.log(err.message)
+    })
   };
 
   const NavLinks = (
