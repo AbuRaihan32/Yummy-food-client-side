@@ -6,6 +6,7 @@ import { FaEye, FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { googleLogin, githubLogin , signInUser} = useAuth();
@@ -41,28 +42,62 @@ const Login = () => {
     signInUser(email, password)
     .then(result => {
       console.log(result.user)
+      Swal.fire({
+        title: "Logged In!",
+        text: "You have been Logged in.",
+        icon: "success"
+      });
       navigate(location?.state ? location?.state : '/')
     })
-    .catch(err => console.log(err.message))
+    .catch(err => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: err.message,
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
+    })
   };
 
   const googleBtnHandle = () => {
     googleLogin()
-      .then((result) => {
-        console.log(result.user);
-        navigate(location?.state ? location?.state : '/')
-        alert("google logged in");
-      })
-      .catch((err) => console.log(err.message));
+    .then(result => {
+      console.log(result.user)
+      Swal.fire({
+        title: "Logged In!",
+        text: "You have been Logged in.",
+        icon: "success"
+      });
+      navigate(location?.state ? location?.state : '/')
+    })
+    .catch(err => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: err.message,
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
+    })
   };
   const githubBtnHandle = () => {
     githubLogin()
-      .then((result) => {
-        console.log(result.user);
-        navigate(location?.state ? location?.state : '/')
-        alert("google logged in");
-      })
-      .catch((err) => console.log(err.message));
+    .then(result => {
+      console.log(result.user)
+      Swal.fire({
+        title: "Logged In!",
+        text: "You have been Logged in.",
+        icon: "success"
+      });
+      navigate(location?.state ? location?.state : '/')
+    })
+    .catch(err => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: err.message,
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
+    })
   };
 
   return (

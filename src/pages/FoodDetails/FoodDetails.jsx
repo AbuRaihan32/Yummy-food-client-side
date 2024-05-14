@@ -1,11 +1,12 @@
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { IoLocation } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import { FaCircleChevronRight } from "react-icons/fa6";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const FoodDetails = () => {
   const { user } = useAuth();
@@ -13,6 +14,8 @@ const FoodDetails = () => {
   const [food, setFood] = useState([]);
   const axiosSecure = useAxiosSecure();
   const location = useLocation();
+  const modalRef = useRef(null);
+  const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm();
 
@@ -30,12 +33,10 @@ const FoodDetails = () => {
     foodStatus,
   } = food;
 
-
   // ! load food
   useEffect(() => {
     axiosSecure.get(`/singleFood/${id}`).then((data) => setFood(data.data));
   }, [axiosSecure, id]);
-  
 
   // ! handle request button
   const handleRequest = () => {
@@ -43,27 +44,40 @@ const FoodDetails = () => {
       Swal.fire({
         icon: "error",
         title: "Oops...",
-        text: "You cannot request the food you added!"
+        text: "You cannot request the food you added!",
       });
     } else {
-      document.getElementById("my_modal_4").showModal();
+      modalRef.current.showModal();
     }
   };
 
-  
   // ! handle Request Confirm Button
   const onSubmit = (data) => {
     const { requestDate, userEmail } = data;
-    console.log(requestDate, userEmail);
+    const updatedFood = { requestDate, userEmail };
+
+    // update
+    axiosSecure
+      .put(`requestFood/${_id}`, updatedFood)
+      .then((data) => {
+        if (data.data.modifiedCount) {
+          Swal.fire({
+            title: "Requested",
+            text: "Your food has been Requested.",
+            icon: "success",
+          });
+          modalRef.current.close();
+          navigate(location.state ?  location.state : '/')
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
-
-
-
-
-  
   return (
     <>
+    <Helmet>
+      <title>Yummy || Details Page</title>
+    </Helmet>
       <div className="hero min-h-screen bg-base-200 rounded-2xl">
         <div className="hero-content flex-col lg:flex-row md:p-16 gap-10 md:pl-24">
           <img
@@ -152,7 +166,7 @@ const FoodDetails = () => {
       </div>
 
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
-      <dialog id="my_modal_4" className="modal">
+      <dialog id="my_modal_4" className="modal" ref={modalRef}>
         <div className="modal-box w-11/12 max-w-[60%]">
           <form className="" onSubmit={handleSubmit(onSubmit)}>
             {/* row 1 */}

@@ -6,6 +6,7 @@ import { FaEye } from "react-icons/fa";
 import { RiEyeCloseFill } from "react-icons/ri";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { createUser, updateUser, logOut } = useAuth();
@@ -48,8 +49,20 @@ const Register = () => {
           .catch((err) => {
             console.log(err.message);
           });
+          Swal.fire({
+            title: "Registered!",
+            text: "You have been Registered Successfully.",
+            icon: "success"
+          });
       })
-      .catch((err) => console.log(err.message));
+      .catch(err => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.message,
+          footer: '<a href="#">Why do I have this issue?</a>'
+        });
+      })
   };
 
   return (

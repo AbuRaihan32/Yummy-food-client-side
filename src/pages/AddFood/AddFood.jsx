@@ -2,11 +2,13 @@ import { Helmet } from "react-helmet-async";
 import { useForm } from "react-hook-form";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const AddFood = () => {
   const axiosSecure = useAxiosSecure();
-  const {user} = useAuth();
-  console.log(user)
+  const { user } = useAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -15,15 +17,7 @@ const AddFood = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    const {
-      name,
-      image,
-      quantity,
-      location,
-      date,
-      notes,
-      status
-    } = data;
+    const { name, image, quantity, location, date, notes, status } = data;
 
     const newFood = {
       foodName: name,
@@ -33,14 +27,31 @@ const AddFood = () => {
       expiryDateTime: date,
       additionalNotes: notes,
       foodStatus: status,
-      donatorImage : user?.photoURL,
-      donatorName : user?.displayName,
-      donatorEmail : user?.email,
+      donatorImage: user?.photoURL,
+      donatorName: user?.displayName,
+      donatorEmail: user?.email,
     };
 
-    axiosSecure.post("/addFood", newFood).then((res) => {
-      alert(res.data);
-    });
+    axiosSecure
+      .post("/addFood", newFood)
+      .then((data) => {
+        console.log(data.data);
+        if (data.data.insertedId) {
+          Swal.fire({
+            title: "Added",
+            text: "Your food has been Added.",
+            icon: "success",
+          });
+          navigate("/availableFoods");
+        }
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "Error",
+          title: "Oops...",
+          text: err.message,
+        });
+      });
   };
 
   return (
@@ -253,7 +264,7 @@ const AddFood = () => {
                             className="w-full pl-3 py-2 rounded-lg border-2 border-gray-200 outline-none focus:border-indigo-500"
                             value={user?.email}
                             placeholder="Donator Email"
-                            {...register("donatorEmail" , {required: true})}
+                            {...register("donatorEmail", { required: true })}
                           />
                         </div>
                       </div>

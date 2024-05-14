@@ -1,19 +1,27 @@
 import { useEffect, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import MyRequestRow from "./MyRequestRow";
+import useAuth from "../../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const MyRequest = () => {
-    const [myFood, setMyFood] = useState([]);
-    const axiosSecure = useAxiosSecure();
-  
-    useEffect(() => {
-      axiosSecure
-        .get("/featuredFoods?email=admin@gmail.com")
-        .then((res) => setMyFood(res.data));
-    }, [axiosSecure]);
-  
-  
-    return (
+  const [myFood, setMyFood] = useState([]);
+  const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+
+  console.log(myFood);
+
+  useEffect(() => {
+    axiosSecure
+      .get(`/requestedFoods?foodStatus=Requested&userEmail=${user.email}`)
+      .then((res) => setMyFood(res.data));
+  }, [axiosSecure, user]);
+
+  return (
+    <>
+    <Helmet>
+      <title>Yummy || My Request</title>
+    </Helmet>
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -22,7 +30,9 @@ const MyRequest = () => {
               <th>No.</th>
               <th>Food Name</th>
               <th>Pickup Location</th>
+              <th>Request Date </th>
               <th>Expiry Date </th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
@@ -36,7 +46,7 @@ const MyRequest = () => {
           </tbody>
         </table>
       </div>
-    );
-
-}
+    </>
+  );
+};
 export default MyRequest;

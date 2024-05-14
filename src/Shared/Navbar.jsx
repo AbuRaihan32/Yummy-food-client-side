@@ -1,20 +1,32 @@
 import { BiLogInCircle, BiLogOutCircle } from "react-icons/bi";
 import { RiEye2Line } from "react-icons/ri";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { PuffLoader } from "react-spinners";
 import useAuth from "../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
+  const navigate = useNavigate();
 
   const signOutBtnHandler = () => {
     logOut()
-      .then(() => {
-        alert("Sign Out successfully");
-      })
-      .catch((err) => {
-        console.log(err.message);
+    .then(() => {
+      Swal.fire({
+        title: "Logged Out!",
+        text: "You have been Logged Out.",
+        icon: "success"
       });
+      navigate('/login')
+    })
+    .catch(err => {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: err.message,
+        footer: '<a href="#">Why do I have this issue?</a>'
+      });
+    })
   };
 
   const NavLinks = (
@@ -23,7 +35,7 @@ const Navbar = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "border border-[#32CD32] hover:bg-[#008000] rounded-md py-[7px] px-3"
+              ? "border border-[#32CD32] hover:bg-[#008000] hover:text-white rounded-md py-[7px] px-3"
               : "py-[6px] px-3"
           }
           to={"/"}
@@ -36,7 +48,7 @@ const Navbar = () => {
         <NavLink
           className={({ isActive }) =>
             isActive
-              ? "border border-[#32CD32] hover:bg-[#008000] rounded-md py-[7px] px-3"
+              ? "border border-[#32CD32] hover:bg-[#008000] hover:text-white rounded-md py-[7px] px-3"
               : "py-[6px] px-3"
           }
           to={"/availableFoods"}
@@ -49,7 +61,7 @@ const Navbar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "border border-[#32CD32] hover:bg-[#008000] rounded-md py-[7px] px-3"
+                ? "border border-[#32CD32] hover:bg-[#008000] hover:text-white rounded-md py-[7px] px-3"
                 : "py-[6px] px-3"
             }
             to={"/addFood"}
@@ -64,7 +76,7 @@ const Navbar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "border border-[#32CD32] hover:bg-[#008000] rounded-md py-[7px] px-3"
+                ? "border border-[#32CD32] hover:bg-[#008000] hover:text-white rounded-md py-[7px] px-3"
                 : "py-[6px] px-3"
             }
             to={"/manageFoods"}
@@ -79,7 +91,7 @@ const Navbar = () => {
           <NavLink
             className={({ isActive }) =>
               isActive
-                ? "border border-[#32CD32] hover:bg-[#008000] rounded-md py-[7px] px-3"
+                ? "border border-[#32CD32] hover:bg-[#008000] hover:text-white rounded-md py-[7px] px-3"
                 : "py-[6px] px-3"
             }
             to={"/myRequest"}
