@@ -45,3 +45,6 @@ The npm package names which i have used for the challenges task:
 - [@AOS-Package](https://www.npmjs.com/package/aos) This package I used to animate the Estate section of my home page.
 2.
 - [@React-Hook-form](https://react-hook-form.com/) I have used this package to collect data for my form. It is used in login and register pages.
+
+3.
+- [@lottie-react](https://lottiefiles.com/free-animations/react) I have used this package in login and register pages.
