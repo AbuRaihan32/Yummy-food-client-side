@@ -1,21 +1,48 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import FeaturedCard from "./FeaturedCard";
 import { Link } from "react-router-dom";
 import { BsArrowRight } from "react-icons/bs";
+import { useQuery } from "@tanstack/react-query";
+import { PuffLoader } from "react-spinners";
 
 const FeaturedFoods = () => {
   const axiosSecure = useAxiosSecure();
   const [foods, setFoods] = useState([]);
 
-  useEffect(() => {
-    axiosSecure
-      .get("/availableFoods?foodStatus=Available")
-      .then((data) => setFoods(data.data));
-  }, [axiosSecure]);
+  // useEffect(() => {
+  //   axiosSecure
+  //     .get()
+  //     .then((data) => setFoods(data.data));
+  // }, [axiosSecure]);
+  const { isPending, isError } = useQuery({
+    queryKey: ["featured"],
+    queryFn: async () => {
+      const response = await axiosSecure.get(
+        "/availableFoods?foodStatus=Available"
+      );
+      setFoods(response.data);
+      return response.data;
+    },
+  });
 
+  if (isPending) {
+    return (
+      <div className="w-full h-[200px] flex items-center justify-center">
+        <PuffLoader color="#32cd32"></PuffLoader>
+      </div>
+    );
+  }
 
-  foods.sort((a, b) => b.quantityAvailable - a.quantityAvailable)
+  if (isError) {
+    return (
+      <div className="w-full h-[200px] flex items-center justify-center">
+        <p className="text-3xl">Failed To Fetch Data</p>
+      </div>
+    );
+  }
+
+  foods.sort((a, b) => b.quantityAvailable - a.quantityAvailable);
 
   return (
     <div className="text-center mt-14">

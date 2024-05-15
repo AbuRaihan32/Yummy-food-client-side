@@ -8,7 +8,7 @@ const Review = () => {
         </p>
       </div>
 
-      <div className="flex mt-6">
+      <div className="flex flex-col space-y-3 md:flex-row mt-6">
         <div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md border-[1px] border-green-400">
           <div className="flex justify-between p-4">
             <div className="flex space-x-4">

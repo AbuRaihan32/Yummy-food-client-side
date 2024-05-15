@@ -1,41 +1,38 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import ManageFoodRow from "./ManageFoodRow";
 import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
-import { useQuery } from "@tanstack/react-query";
 import { PuffLoader } from "react-spinners";
 
 const ManageFood = () => {
   const { user } = useAuth();
   const [myFood, setMyFood] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const [toggle, setToggle] = useState(true);
   const axiosSecure = useAxiosSecure();
 
+  useEffect(() => {
+    axiosSecure
+      .get(`/featuredFoods?email=${user.email}`)
+      .then((res) => {
+        setMyFood(res.data);
+        setLoading(false);
+        setError(null);
+      })
+      .catch((error) => {
+        setLoading(false);
+        setError(error.message || "An error occurred while fetching data.");
+      });
+  }, [axiosSecure, user, toggle]);
 
-  const { isPending, isError } = useQuery({
-    queryKey: ["manageFoods"],
-    queryFn: async () => {
-      const response = await axiosSecure.get(`/featuredFoods?email=${user.email}`);
-      setMyFood(response.data);
-      return response.data;
-    },
-  });
-
-  if (isPending) {
-    return (
-      <div className="w-full h-[200px] flex items-center justify-center">
-        <PuffLoader color="#32cd32"></PuffLoader>
-      </div>
-    );
+  if (loading) {
+    return <div className="w-full h-[200px] flex items-center justify-center"><PuffLoader color="#32cd32"></PuffLoader></div>
   }
 
-  if (isError) {
-    return (
-      <div className="w-full h-[200px] flex items-center justify-center">
-        <p className="text-3xl">Failed To Fetch Data</p>
-      </div>
-    );
+  if (error) {
+    return <div className="w-full h-[200px] flex items-center justify-center text-2xl text-center">Something went wrong!</div>
   }
 
   return (
@@ -46,7 +43,7 @@ const ManageFood = () => {
 
       {myFood?.length < 1 ? (
         <div className="w-full h-[300px] flex items-center justify-center font-semibold text-4xl">
-          <div>You have not Added any food</div>
+          <div className="text-center">You have not added any food</div>
         </div>
       ) : (
         <div className="overflow-x-auto">
@@ -57,7 +54,7 @@ const ManageFood = () => {
                 <th>No.</th>
                 <th>Food Name</th>
                 <th>Pickup Location</th>
-                <th>Expiry Date </th>
+                <th>Expiry Date</th>
                 <th>Additional Notes</th>
                 <th></th>
                 <th></th>

@@ -5,7 +5,7 @@ import auth from "../Firebase/Firebase.init";
 import { signOut } from "firebase/auth";
 
 const axiosSecure = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://11th-assignment-server-site.vercel.app",
   withCredentials: true,
 });
 

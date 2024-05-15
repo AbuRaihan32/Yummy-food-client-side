@@ -33,7 +33,7 @@ const MyRequest = () => {
   if (isError) {
     return (
       <div className="w-full h-[200px] flex items-center justify-center">
-        <p className="text-3xl">Failed To Fetch Data</p>
+        <p className="text-3xl text-center">Failed To Fetch Data</p>
       </div>
     );
   }
@@ -45,7 +45,7 @@ const MyRequest = () => {
       </Helmet>
       {myFood?.length < 1 ? (
         <div className="w-full h-[300px] flex items-center justify-center font-semibold text-4xl">
-          <div>You have not requested any food</div>
+          <div className="text-center">You have not requested any food</div>
         </div>
       ) : (
         <div className="overflow-x-auto">

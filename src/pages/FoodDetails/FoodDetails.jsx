@@ -1,12 +1,14 @@
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { IoLocation } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import { FaCircleChevronRight } from "react-icons/fa6";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet-async";
+import { useQuery } from "@tanstack/react-query";
+import { PuffLoader } from "react-spinners";
 
 const FoodDetails = () => {
   const { user } = useAuth();
@@ -16,6 +18,7 @@ const FoodDetails = () => {
   const location = useLocation();
   const modalRef = useRef(null);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
 
   const { register, handleSubmit } = useForm();
 
@@ -33,10 +36,39 @@ const FoodDetails = () => {
     foodStatus,
   } = food;
 
-  // ! load food
-  useEffect(() => {
-    axiosSecure.get(`/singleFood/${id}`).then((data) => setFood(data.data));
-  }, [axiosSecure, id]);
+  const { isPending, isError } = useQuery({
+    queryKey: ["foodDetails"],
+    queryFn: async () => {
+      const response = await axiosSecure.get(`/singleFood/${id}`);
+      setFood(response.data);
+      setLoading(false);
+      return response.data;
+    },
+  });
+
+  if (loading) {
+    return (
+      <div className="w-full h-[200px] flex items-center justify-center">
+        <PuffLoader color="#32cd32"></PuffLoader>
+      </div>
+    );
+  }
+
+  if (isPending) {
+    return (
+      <div className="w-full h-[200px] flex items-center justify-center">
+        <PuffLoader color="#32cd32"></PuffLoader>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="w-full h-[200px] flex items-center justify-center">
+        <p className="text-3xl">Failed To Fetch Data</p>
+      </div>
+    );
+  }
 
   // ! handle request button
   const handleRequest = () => {
@@ -67,7 +99,7 @@ const FoodDetails = () => {
             icon: "success",
           });
           modalRef.current.close();
-          navigate(location.state ?  location.state : '/')
+          navigate(location.state ? location.state : "/");
         }
       })
       .catch((err) => console.log(err));
@@ -75,9 +107,9 @@ const FoodDetails = () => {
 
   return (
     <>
-    <Helmet>
-      <title>Yummy || Details Page</title>
-    </Helmet>
+      <Helmet>
+        <title>Yummy || Details Page</title>
+      </Helmet>
       <div className="hero min-h-screen bg-base-200 rounded-2xl">
         <div className="hero-content flex-col lg:flex-row md:p-16 gap-10 md:pl-24">
           <img

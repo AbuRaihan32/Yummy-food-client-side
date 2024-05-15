@@ -71,12 +71,12 @@ const AvailableFoods = () => {
       >
         <div className="min-w-screen min-h-screen rounded-3xl bg-black bg-opacity-70 pt-14 pb-24">
           {availableFoods?.length < 1 ? (
-            <div className="w-full h-[500px] flex items-center justify-center text-[#fcfcfc] font-semibold text-4xl">
+            <div className="w-full h-[500px] flex items-center justify-center text-[#fcfcfc] font-semibold text-4xl text-center">
               <div>No food available.</div>
             </div>
           ) : (
             <div className="relative">
-              <div onClick={ ()=> setLayout(!layout)} className="absolute py-1 px-3 text-white font-bold rounded-lg hover:bg-[#2e7c2e] right-10 -top-4 bg-[#32CD32]"><button>change Layout</button></div>
+              <div onClick={ ()=> setLayout(!layout)} className="absolute py-1 px-3 text-white font-bold rounded-lg hover:bg-[#2e7c2e] md:right-10 right-5 -top-9 md:-top-4 bg-[#32CD32]"><button>change Layout</button></div>
               <h1 className="text-4xl font-bold mb-7 text-white text-center">
                 Available Foods
               </h1>
@@ -89,7 +89,7 @@ const AvailableFoods = () => {
 
               {/* dropdown for Sort */}
               <div className="text-center md:flex justify-around">
-                <div className="relative inline-flex self-center">
+                <div className="relative inline-flex self-center mb-5 md:mb-0">
                   <div className="text-white text-xl bg-[#32Cd32] absolute top-2 right-2 m-2 pointer-events-none p-1 rounded">
                     <IoIosArrowDown></IoIosArrowDown>
                   </div>

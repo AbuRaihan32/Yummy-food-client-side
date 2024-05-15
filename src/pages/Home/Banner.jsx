@@ -1,10 +1,7 @@
-import Carousel from "react-elastic-carousel";
-import './banner.css'
-
 const Banner = () => {
   return (
-    <Carousel>
-      <div className="carousel w-full h-[calc(100vh-30vh)] rounded-3xl">
+    <>
+      <div className="carousel w-full h-[400px] md:h-[500px] rounded-3xl">
         <div id="slide1" className="carousel-item relative w-full">
           <img
             src={"https://i.ibb.co/0njDY6Y/pexels-norma-mortenson-4393436.jpg"}
@@ -23,9 +20,15 @@ const Banner = () => {
               <button className="btn btn-outline btn-warning">Feedback</button>
             </div>
           </div>
+          <div className="absolute flex justify-end transform -translate-y-1/2 left-5 right-5 bottom-0">
+            <a href="#slide4" className="btn btn-circle bg-orange-600 mr-7">
+              ❮
+            </a>
+            <a href="#slide2" className="btn btn-circle bg-orange-600 ">
+              ❯
+            </a>
+          </div>
         </div>
-      </div>
-      <div className="carousel w-full h-[calc(100vh-30vh)] rounded-3xl">
         <div id="slide2" className="carousel-item relative w-full">
           <img
             src={
@@ -47,9 +50,16 @@ const Banner = () => {
               <button className="btn btn-outline btn-warning">Feedback</button>
             </div>
           </div>
+          <div className="absolute flex justify-end transform -translate-y-1/2 left-5 right-5 bottom-0">
+            <a href="#slide1" className="btn btn-circle  bg-orange-600 mr-7">
+              ❮
+            </a>
+            <a href="#slide3" className="btn btn-circle bg-orange-600 ">
+              ❯
+            </a>
+          </div>
         </div>
-      </div>
-      <div className="carousel w-full h-[calc(100vh-30vh)] rounded-3xl">
+
         <div id="slide3" className="carousel-item relative w-full">
           <img
             src={"https://i.ibb.co/KGMG6mY/pexels-norma-mortenson-4393426.jpg"}
@@ -69,9 +79,16 @@ const Banner = () => {
               <button className="btn btn-outline btn-warning">Feedback</button>
             </div>
           </div>
+          <div className="absolute flex justify-end transform -translate-y-1/2 left-5 right-5 bottom-0">
+            <a href="#slide2" className="btn btn-circle  bg-orange-600 mr-7">
+              ❮
+            </a>
+            <a href="#slide4" className="btn btn-circle  bg-orange-600">
+              ❯
+            </a>
+          </div>
         </div>
-      </div>
-      <div className="carousel w-full h-[calc(100vh-30vh)] rounded-3xl">
+
         <div id="slide4" className="carousel-item relative w-full">
           <img
             src={"https://i.ibb.co/Hz0C9Yp/chef-5993951-640.jpg"}
@@ -91,9 +108,17 @@ const Banner = () => {
               <button className="btn btn-outline btn-warning">Feedback</button>
             </div>
           </div>
+          <div className="absolute flex justify-end transform -translate-y-1/2 left-5 right-5 bottom-0">
+            <a href="#slide3" className="btn btn-circle bg-orange-600 mr-7">
+              ❮
+            </a>
+            <a href="#slide1" className="btn btn-circle  bg-orange-600">
+              ❯
+            </a>
+          </div>
         </div>
       </div>
-    </Carousel>
+    </>
   );
 };
 

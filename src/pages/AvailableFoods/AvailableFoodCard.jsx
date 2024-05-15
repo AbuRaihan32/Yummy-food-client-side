@@ -24,7 +24,7 @@ const AvailableFoodCard = ({ food }) => {
       <div
         data-aos="zoom-in"
         data-aos-duration="700"
-        className="border rounded-2xl bg-gray-100 border-[#32CD32] p-7 shadow-xl"
+        className="border rounded-2xl bg-gray-100 text-gray-800 border-[#32CD32] p-7 shadow-xl"
       >
         <figure>
           <img

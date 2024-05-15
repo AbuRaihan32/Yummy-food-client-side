@@ -1,19 +1,41 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import MeetOurTeamCard from "./MeetOurTeamCard";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import Marquee from "react-fast-marquee";
+import { useQuery } from "@tanstack/react-query";
+import { PuffLoader } from "react-spinners";
 
 const MeetOurTeam = () => {
   const [teams, setTeams] = useState([]);
   const axiosSecure = useAxiosSecure();
 
-  useEffect(() => {
-    axiosSecure
-      .get("/team")
-      .then((res) => setTeams(res.data))
-      .catch((err) => console.log(err.message));
-  }, [axiosSecure]);
+  const { isPending, isError } = useQuery({
+    queryKey: ["Teams"],
+    queryFn: async () => {
+      const response = await axiosSecure.get('/teams');
+      setTeams(response.data);
+      return response.data;
+    },
+  });
+  console.log(teams)
+
+  if (isPending) {
+    return (
+      <div className="w-full h-[200px] flex items-center justify-center">
+        <PuffLoader color="#32cd32"></PuffLoader>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="w-full h-[200px] flex items-center justify-center">
+        <p className="text-3xl">Failed To Fetch Data</p>
+      </div>
+    );
+  }
+
   return (
     <>
       <div className="text-center">
