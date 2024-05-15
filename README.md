@@ -22,6 +22,7 @@ My Website Firebase Live Link is :
 
 
 five bullet points features and characteristics:
+
     
     1. If a user wants to add food to donate while logged in then he can add through add food.
 
