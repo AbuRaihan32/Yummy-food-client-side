@@ -14,7 +14,7 @@ Currently, two official plugins are available:
 <!-- Information i added -->
 
 # Yummy Food
-It is a very helpful site for buying, selling and renting a house. Which is set with high security.
+This site is going to be very helpful for those who want to donate food or request food.
 
 My Website Firebase Live Link is : 
 - [@YummyFood-firebase-live-link](https://yummy-food-f714c.web.app/) Click Here For Visit live site.
