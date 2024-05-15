@@ -73,11 +73,11 @@ const Register = () => {
       <div
         style={{
           backgroundImage:
-            "url(https://i.ibb.co/c3R6bpD/pexels-hebaysal-2776479.jpg)",
+            "url(https://i.ibb.co/QcwgFJX/rr.jpg)",
         }}
-        className="bg-cover bg-center rounded-b-3xl"
+        className="bg-cover bg-bottom bg-fixed rounded-3xl"
       >
-        <div className="min-w-screen min-h-screen rounded-b-3xl bg-gray-900 bg-opacity-80 flex items-center justify-center px-5 py-5">
+        <div className="min-w-screen min-h-screen rounded-3xl bg-black bg-opacity-70 flex items-center justify-center px-5 py-10">
           <div className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden max-w-[1000px] mt-8">
             <div className="md:flex w-full">
               <div className="hidden md:block w-1/2 bg-[#32CD32] py-10 px-10">

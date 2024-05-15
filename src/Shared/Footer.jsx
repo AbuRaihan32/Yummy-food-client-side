@@ -5,11 +5,11 @@ const Footer = () => {
     <footer
       style={{
         backgroundImage:
-          "url(https://i.ibb.co/DtDBNfN/pexels-vecislavas-popa-1571463.jpg)",
+          "url(https://i.ibb.co/nzFx8Bn/pexels-julia-m-cameron-6995244-1.jpg)",
       }}
-      className="rounded-t-3xl divide-y mt-20 bg-center bg-cover bg-no-repeat text-white "
+      className="rounded-t-3xl divide-y mt-20 bg-top bg-fixed bg-cover bg-no-repeat text-white "
     >
-      <div className="bg-black bg-opacity-70 px-10 pt-12 pb-7 rounded-t-3xl">
+      <div className="bg-black bg-opacity-80 px-10 pt-12 pb-7 rounded-t-3xl">
         <div className="flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
           <div className="lg:w-1/3 text-center">
             <a
@@ -18,7 +18,7 @@ const Footer = () => {
               className="flex justify-center space-x-3 lg:justify-start"
             >
               <div className="w-14 h-14 mx-auto rounded-full">
-                <img className="w-full h-full" src={"/logo.png"} alt="" />
+                <RiEye2Line className="text-6xl text-[#32CD32]"></RiEye2Line>
               </div>
             </a>
             <a className="btn btn-ghost text-3xl font-bold">

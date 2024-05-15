@@ -1,28 +1,54 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import MyRequestRow from "./MyRequestRow";
 import useAuth from "../../Hooks/useAuth";
 import { Helmet } from "react-helmet-async";
+import { useQuery } from "@tanstack/react-query";
+import { PuffLoader } from "react-spinners";
 
 const MyRequest = () => {
   const [myFood, setMyFood] = useState([]);
   const axiosSecure = useAxiosSecure();
   const { user } = useAuth();
 
-  console.log(myFood);
+  const { isPending, isError } = useQuery({
+    queryKey: ["myRequest"],
+    queryFn: async () => {
+      const response = await axiosSecure.get(
+        `/requestedFoods?foodStatus=Requested&userEmail=${user.email}`
+      );
+      setMyFood(response.data);
+      return response.data;
+    },
+  });
 
-  useEffect(() => {
-    axiosSecure
-      .get(`/requestedFoods?foodStatus=Requested&userEmail=${user.email}`)
-      .then((res) => setMyFood(res.data));
-  }, [axiosSecure, user]);
+  if (isPending) {
+    return (
+      <div className="w-full h-[200px] flex items-center justify-center">
+        <PuffLoader color="#32cd32"></PuffLoader>
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="w-full h-[200px] flex items-center justify-center">
+        <p className="text-3xl">Failed To Fetch Data</p>
+      </div>
+    );
+  }
 
   return (
     <>
-    <Helmet>
-      <title>Yummy || My Request</title>
-    </Helmet>
-      <div className="overflow-x-auto">
+      <Helmet>
+        <title>Yummy || My Request</title>
+      </Helmet>
+      {myFood?.length < 1 ? (
+        <div className="w-full h-[300px] flex items-center justify-center font-semibold text-4xl">
+          <div>You have not requested any food</div>
+        </div>
+      ) : (
+        <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
           <thead>
@@ -46,6 +72,9 @@ const MyRequest = () => {
           </tbody>
         </table>
       </div>
+      )}
+
+ 
     </>
   );
 };

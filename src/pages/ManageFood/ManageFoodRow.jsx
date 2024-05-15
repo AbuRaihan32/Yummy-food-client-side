@@ -74,6 +74,13 @@ const ManageFoodRow = ({ food, index, setToggle, toggle }) => {
           });
           modalRef.current.close();
           setToggle(!toggle);
+        }else{
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "You didn't make any changes",
+          });
+          modalRef.current.close();
         }
       })
       .catch((err) => console.log(err));
@@ -340,7 +347,7 @@ const ManageFoodRow = ({ food, index, setToggle, toggle }) => {
                   <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-[18deg] bg-[#32CC32] group-hover:bg-[#188d18] group-hover:-skew-x-[18deg]"></span>
 
                   <span className="flex items-center justify-center gap-2 relative">
-                    <span>Confirm Request</span>{" "}
+                    <span>Save Update</span>{" "}
                   </span>
                 </button>
               </div>

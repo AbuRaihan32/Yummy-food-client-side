@@ -45,11 +45,12 @@ const AddFood = () => {
           navigate("/availableFoods");
         }
       })
-      .catch((err) => {
+      .catch(() => {
         Swal.fire({
-          icon: "Error",
+          icon: "error",
           title: "Oops...",
-          text: err.message,
+          text: "Something went wrong!",
+          footer: '<a href="#">Why do I have this issue?</a>',
         });
       });
   };
@@ -63,11 +64,11 @@ const AddFood = () => {
         <div
           style={{
             backgroundImage:
-              "url(https://i.ibb.co/c3R6bpD/pexels-hebaysal-2776479.jpg)",
+              "url(https://i.ibb.co/QcwgFJX/rr.jpg)",
           }}
-          className="bg-cover bg-center rounded-b-3xl"
+          className="bg-cover bg-bottom bg-fixed rounded-3xl"
         >
-          <div className="min-w-screen min-h-screen pt-32 pb-24 bg-gray-900 bg-opacity-80 flex items-center justify-center px-5 rounded-b-3xl">
+          <div className="min-w-screen min-h-screen pt-32 pb-24 bg-black bg-opacity-70 flex items-center justify-center px-5 rounded-3xl">
             <div className="bg-gray-100 text-gray-500 rounded-3xl shadow-xl w-full overflow-hidden md:max-w-[90%]">
               <div className="md:flex w-full">
                 <div className="hidden md:block w-[40%] bg-[#32CD32]">
@@ -81,7 +82,7 @@ const AddFood = () => {
                 <div className="w-full md:w-[60%] py-10 px-5 md:px-10">
                   <div className="text-center mb-10">
                     <h1 className="font-bold text-3xl text-gray-900">
-                      ADD YOUR FAVOURITE FOOD
+                      ADD YOUR FOOD FOR DONATE
                     </h1>
                     <p>Enter Food Information To Add</p>
                   </div>

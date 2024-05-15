@@ -9,13 +9,12 @@ import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 
 const Login = () => {
-  const { googleLogin, githubLogin , signInUser} = useAuth();
+  const { googleLogin, githubLogin, signInUser } = useAuth();
   const [error, setError] = useState("");
   const [show, setShow] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate()
-  console.log(location)
-
+  const navigate = useNavigate();
+  console.log(location);
 
   const {
     register,
@@ -38,66 +37,69 @@ const Login = () => {
     }
     setError("");
 
-    // sign in user 
+    //! sign in user
     signInUser(email, password)
-    .then(result => {
-      console.log(result.user)
-      Swal.fire({
-        title: "Logged In!",
-        text: "You have been Logged in.",
-        icon: "success"
+    // const user = {email: email}
+      .then(() => {
+        Swal.fire({
+          title: "Logged In!",
+          text: "You have been Logged in.",
+          icon: "success",
+        });
+        navigate(location?.state ? location?.state : "/");
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.message,
+          footer: '<a href="#">Why do I have this issue?</a>',
+        });
       });
-      navigate(location?.state ? location?.state : '/')
-    })
-    .catch(err => {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: err.message,
-        footer: '<a href="#">Why do I have this issue?</a>'
-      });
-    })
   };
 
+  // !google Login
   const googleBtnHandle = () => {
     googleLogin()
-    .then(result => {
-      console.log(result.user)
-      Swal.fire({
-        title: "Logged In!",
-        text: "You have been Logged in.",
-        icon: "success"
+      .then((result) => {
+        console.log(result.user);
+        Swal.fire({
+          title: "Logged In!",
+          text: "You have been Logged in.",
+          icon: "success",
+        });
+        navigate(location?.state ? location?.state : "/");
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.message,
+          footer: '<a href="#">Why do I have this issue?</a>',
+        });
       });
-      navigate(location?.state ? location?.state : '/')
-    })
-    .catch(err => {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: err.message,
-        footer: '<a href="#">Why do I have this issue?</a>'
-      });
-    })
   };
+
+  // ! github Login
   const githubBtnHandle = () => {
     githubLogin()
-    .then(result => {
-      console.log(result.user)
-      Swal.fire({
-        title: "Logged In!",
-        text: "You have been Logged in.",
-        icon: "success"
+      .then((result) => {
+        console.log(result.user);
+        Swal.fire({
+          title: "Logged In!",
+          text: "You have been Logged in.",
+          icon: "success",
+        });
+        navigate(location?.state ? location?.state : "/");
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: err.message,
+          footer: '<a href="#">Why do I have this issue?</a>',
+        });
       });
-      navigate(location?.state ? location?.state : '/')
-    })
-    .catch(err => {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: err.message,
-        footer: '<a href="#">Why do I have this issue?</a>'
-      });
-    })
   };
 
   return (
@@ -108,11 +110,11 @@ const Login = () => {
       <div
         style={{
           backgroundImage:
-            "url(https://i.ibb.co/c3R6bpD/pexels-hebaysal-2776479.jpg)",
+            "url(https://i.ibb.co/QcwgFJX/rr.jpg)",
         }}
-        className="bg-cover bg-center rounded-b-3xl"
+        className="bg-cover bg-bottom bg-fixed rounded-3xl"
       >
-        <div className="min-w-screen min-h-screen bg-gray-900 bg-opacity-80 flex items-center justify-center px-5 py-5 rounded-b-3xl">
+        <div className="min-w-screen min-h-screen bg-black bg-opacity-70 flex items-center justify-center px-5 py-5 rounded-3xl">
           <div className="bg-gray-100 text-gray-700 rounded-3xl shadow-xl w-full overflow-hidden max-w-[1000px] mt-8">
             <div className="md:flex w-full">
               <div className="hidden md:block w-1/2 bg-[#32CD32] py-10 px-10">

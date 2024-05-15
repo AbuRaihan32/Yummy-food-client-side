@@ -1,21 +1,37 @@
 import { IoIosArrowDown } from "react-icons/io";
 import AvailableFoodCard from "./AvailableFoodCard";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import { FaSearch } from "react-icons/fa";
 import { Helmet } from "react-helmet-async";
+import { useQuery } from "@tanstack/react-query";
+import { PuffLoader } from "react-spinners";
 
 const AvailableFoods = () => {
   const axiosSecure = useAxiosSecure();
   const [availableFoods, setAvailableFoods] = useState([]);
   const [search, setSearch] = useState("");
+  const [layout, setLayout]= useState(true);
 
-  useEffect(() => {
-    axiosSecure
-      .get("/availableFoods?foodStatus=Available")
-      .then((res) => setAvailableFoods(res.data));
-  }, [axiosSecure]);
+  const { isPending, isError } = useQuery({
+    queryKey: ['availableFoods'],
+    queryFn: async () => {
+      const response = await axiosSecure.get('/availableFoods?foodStatus=Available');
+      setAvailableFoods(response.data)
+      return response.data;
+    },
+  });
 
+  if(isPending){
+    return <div className="w-full h-[200px] flex items-center justify-center"><PuffLoader color="#32cd32"></PuffLoader></div>
+  }
+
+  if(isError){
+    return <div className="w-full h-[200px] flex items-center justify-center"><p className="text-3xl">Failed To Fetch Data</p></div>
+  }
+
+
+  
   const handleShortBtn = (e) => {
     const selectedValue = e.target.value;
     let sortedFoods = [...availableFoods];
@@ -28,7 +44,7 @@ const AvailableFoods = () => {
         (a, b) => new Date(b.expiryDateTime) - new Date(a.expiryDateTime)
       );
     }
-    setAvailableFoods([...sortedFoods]);
+    setAvailableFoods(sortedFoods);
   };
 
   const handleSearch = (e) => {
@@ -36,29 +52,31 @@ const AvailableFoods = () => {
     setSearch(searchedWord);
   };
 
-  const filteredFoods = availableFoods.filter((food) =>
+  const filteredFoods = availableFoods?.filter((food) =>
     food.foodName.toLowerCase().includes(search.toLowerCase())
   );
 
   return (
     <>
+
     <Helmet>
       <title>Yummy || AvailableFoods</title>
     </Helmet>
       <div
         style={{
           backgroundImage:
-            "url(https://i.ibb.co/c3R6bpD/pexels-hebaysal-2776479.jpg)",
+            "url(https://i.ibb.co/QcwgFJX/rr.jpg)",
         }}
-        className="bg-cover bg-center rounded-b-3xl"
+        className="bg-contain bg-fixed bg-center rounded-3xl"
       >
-        <div className="min-w-screen min-h-screen rounded-b-3xl bg-gray-900 bg-opacity-80 pt-32 pb-24">
+        <div className="min-w-screen min-h-screen rounded-3xl bg-black bg-opacity-70 pt-14 pb-24">
           {availableFoods?.length < 1 ? (
             <div className="w-full h-[500px] flex items-center justify-center text-[#fcfcfc] font-semibold text-4xl">
               <div>No food available.</div>
             </div>
           ) : (
-            <div>
+            <div className="relative">
+              <div onClick={ ()=> setLayout(!layout)} className="absolute py-1 px-3 text-white font-bold rounded-lg hover:bg-[#2e7c2e] right-10 -top-4 bg-[#32CD32]"><button>change Layout</button></div>
               <h1 className="text-4xl font-bold mb-7 text-white text-center">
                 Available Foods
               </h1>
@@ -89,7 +107,7 @@ const AvailableFoods = () => {
                 <div className="relative inline-flex self-center ">
                   <div
                     className={` ${
-                      search.length > 0 ? "hidden" : ""
+                      search?.length > 0 ? "hidden" : ""
                     } text-white text-xl bg-[#32Cd32] absolute top-2 right-3 m-2 pointer-events-none p-1 rounded`}
                   >
                     <FaSearch></FaSearch>
@@ -105,13 +123,13 @@ const AvailableFoods = () => {
                 </div>
               </div>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 w-[95%] mx-auto">
-                {filteredFoods.length < 1 ? (
-                  <div className="text-white text-2xl flex items-center justify-center col-span-3">
+              <div className={layout ? "grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12 w-[95%] mx-auto" : "grid md:grid-cols-2 gap-6 mt-12 w-[85%] mx-auto"}>
+                {filteredFoods?.length < 1 ? (
+                  <div className="text-white text-2xl flex items-center justify-center col-span-3 mt-8">
                     <p>No available foods match your search criteria.</p>
                   </div>
                 ) : (
-                  filteredFoods.map((data) => (
+                  filteredFoods?.map((data) => (
                     <AvailableFoodCard
                       key={data._id}
                       food={data}

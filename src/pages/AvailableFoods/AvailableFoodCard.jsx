@@ -28,7 +28,7 @@ const AvailableFoodCard = ({ food }) => {
       >
         <figure>
           <img
-            className="h-[200px] w-full rounded-2xl"
+            className="h-[200px] w-full object-cover rounded-2xl"
             src={foodImage}
             alt="Food image"
           />

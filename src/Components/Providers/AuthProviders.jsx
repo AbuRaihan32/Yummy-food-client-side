@@ -10,7 +10,9 @@ import {
 } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../../Firebase/Firebase.init";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
+
 
 export const AuthContext = createContext();
 
@@ -20,6 +22,7 @@ const githubProvider = new GithubAuthProvider();
 const AuthProviders = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const axiosSecure = useAxiosSecure();
 
   // ! create user by email and password
   const createUser = (email, password) => {
@@ -47,7 +50,8 @@ const AuthProviders = ({ children }) => {
   // ! Update User
   const updateUser = (name, image) => {
     return updateProfile(auth.currentUser, {
-      displayName: name, photoURL: image,
+      displayName: name,
+      photoURL: image,
     });
   };
 
@@ -60,13 +64,26 @@ const AuthProviders = ({ children }) => {
   // ! User Observer
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+      const loggedUser = {email: currentUser?.email? currentUser?.email : user?.email}
       setUser(currentUser);
+
+      if (currentUser) {
+        // create Token
+        axiosSecure.post("/jwt", loggedUser ).then((res) => {
+          console.log(res.data);
+        });
+      }
+      else{
+        axiosSecure.post('/logout', loggedUser).then(res=>{
+          console.log(res.data)
+        })
+      }
       setLoading(false);
     });
     return () => {
       unSubscribe();
     };
-  }, []);
+  }, [axiosSecure, user]);
 
   const authInfo = {
     user,
@@ -86,6 +103,6 @@ const AuthProviders = ({ children }) => {
 
 AuthProviders.propTypes = {
   children: PropTypes.node,
-}
+};
 
 export default AuthProviders;
