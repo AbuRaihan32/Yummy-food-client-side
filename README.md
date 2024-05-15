@@ -23,20 +23,16 @@ My Website Firebase Live Link is :
 
 five bullet points features and characteristics:
     
-    1. password validation: To login here, the password must be longer than six characters and contain an upper case and a lower case.
+    1. If a user wants to add food to donate while logged in then he can add through add food.
 
-    2. protected routes: No user can update profile and view details of our agents and view properties without login;
+    2. After adding the food, if the user feels that he needs to update any information, he can do that through the Manage Food page.
 
-    3. Toast: Each process success or failure is indicated with a toast.
+    3. If the added food needs to be deleted for any reason, it can also be done from the Manage Food page.
 
-    4. Update Profile: If a user feels that his information is incorrect after logging in, he can edit it
+    4. Search and short functionality has been added to the available food page so that users can easily find their desired food.
 
-    5. Buy a home : It's under What Do You Want on the home page. Used in house Buys.
-    6. Sale a home : It's under What Do You Want on the home page. Used in house sales.
-    7. Rent a home : It's under What Do You Want on the home page. Used in house Rents.
-
-    8. Feedback: Can any user give us their feedback directly.
-
+    5. If a user wants to make a food request then after going to the view details page he can make the request after viewing the details.
+    6. If a user tries to request their food after adding a food, they will be warned with a toast that you cannot request their own added food.
 
 
 
