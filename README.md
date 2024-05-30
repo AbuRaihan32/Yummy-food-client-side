@@ -17,25 +17,23 @@ Currently, two official plugins are available:
 It is a very helpful site for buying, selling and renting a house. Which is set with high security.
 
 My Website Firebase Live Link is : 
-- [@YummyFood-firebase-live-link](https://yummy-food-f714c.web.app/) Click Here For Visit live site.
+- [@YummyFood-firebase-live-link](https://yummy-food-f714c.web.app) Click Here For Visit live site.
 
 
 
 five bullet points features and characteristics:
     
-    1. password validation: To login here, the password must be longer than six characters and contain an upper case and a lower case.
+    1. User can add food with donation amount if he wants to while he is logged in.
 
-    2. protected routes: No user can update profile and view details of our agents and view properties without login;
+    2. Again, the user can request food if he is logged in;
 
-    3. Toast: Each process success or failure is indicated with a toast.
+    3. After a user has added a food for donation, if he feels that his food needs to be updated, he can do so..
 
-    4. Update Profile: If a user feels that his information is incorrect after logging in, he can edit it
+    4. After adding the food, the reserve can delete it if he feels that the food should not be served from him
 
-    5. Buy a home : It's under What Do You Want on the home page. Used in house Buys.
-    6. Sale a home : It's under What Do You Want on the home page. Used in house sales.
-    7. Rent a home : It's under What Do You Want on the home page. Used in house Rents.
+    5. The user can see his requested dishes in a beautiful table form.
+    6. Here users can do their work safely as their work is secured with tokens.
 
-    8. Feedback: Can any user give us their feedback directly.
 
 
 
@@ -45,3 +43,5 @@ The npm package names which i have used for the challenges task:
 - [@AOS-Package](https://www.npmjs.com/package/aos) This package I used to animate the Estate section of my home page.
 2.
 - [@React-Hook-form](https://react-hook-form.com/) I have used this package to collect data for my form. It is used in login and register pages.
+3.
+- [@Lottie-react](https://react-hook-form.com/) I have used this package to collect data for my form. It is used in login and register pages.

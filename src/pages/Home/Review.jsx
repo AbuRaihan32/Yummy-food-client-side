@@ -8,7 +8,7 @@ const Review = () => {
         </p>
       </div>
 
-      <div className="flex flex-col space-y-3 md:flex-row mt-6">
+      <div className="flex flex-col md:flex-row mt-6">
         <div className="container flex flex-col w-full max-w-lg p-6 mx-auto divide-y rounded-md border-[1px] border-green-400">
           <div className="flex justify-between p-4">
             <div className="flex space-x-4">
@@ -56,7 +56,7 @@ const Review = () => {
             <div className="flex space-x-4">
               <div>
                 <img
-                  src="https://source.unsplash.com/100x100/?portrait"
+                  src="https://i.ibb.co/rvWttPc/00.jpg"
                   alt=""
                   className="object-cover w-12 h-12 rounded-full bg-gray-500 dark:bg-gray-500"
                 />

@@ -76,7 +76,7 @@ const AvailableFoods = () => {
             </div>
           ) : (
             <div className="relative">
-              <div onClick={ ()=> setLayout(!layout)} className="absolute py-1 px-3 text-white font-bold rounded-lg hover:bg-[#2e7c2e] md:right-10 right-5 -top-9 md:-top-4 bg-[#32CD32]"><button>change Layout</button></div>
+              <div onClick={ ()=> setLayout(!layout)} className="absolute py-1 px-3 text-white font-bold rounded-lg hover:bg-[#2e7c2e] md:right-10 right-5 -top-9 md:-top-4 bg-[#32CD32] hidden lg:inline-block"><button>change Layout</button></div>
               <h1 className="text-4xl font-bold mb-7 text-white text-center">
                 Available Foods
               </h1>

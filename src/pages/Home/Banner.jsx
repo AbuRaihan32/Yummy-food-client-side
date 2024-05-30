@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Banner = () => {
   return (
     <>
@@ -14,17 +16,34 @@ const Banner = () => {
                 YummyFood: Delightful dishes delivered fast. Order now for a
                 taste sensation that will satisfy your cravings with every bite.
               </p>
-              <button className="btn btn-active btn-secondary bg-orange-600 mr-5">
-                Get Started
-              </button>
-              <button className="btn btn-outline btn-warning">Feedback</button>
+              <br></br>
+              <Link to={"/addFood"}>
+                <button className="relative px-5 py-2  font-medium group mr-4 ml-4">
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:skew-x-[18deg]"></span>
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:-skew-x-[18deg]"></span>
+
+                  <span className="flex items-center gap-2 relative">
+                    Donate Food
+                  </span>
+                </button>
+              </Link>
+              <Link to={"/availableFoods"}>
+                <button className="relative px-5 py-2  font-medium group mr-4 ml-4">
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:skew-x-[18deg]"></span>
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:-skew-x-[18deg]"></span>
+
+                  <span className="flex items-center gap-2 relative">
+                    Request Food
+                  </span>
+                </button>
+              </Link>
             </div>
           </div>
           <div className="absolute flex justify-end transform -translate-y-1/2 left-5 right-5 bottom-0">
-            <a href="#slide4" className="btn btn-circle bg-orange-600 mr-7">
+            <a href="#slide4" className="btn btn-circle bg-[#32CD32] mr-7">
               ❮
             </a>
-            <a href="#slide2" className="btn btn-circle bg-orange-600 ">
+            <a href="#slide2" className="btn btn-circle bg-[#32CD32] ">
               ❯
             </a>
           </div>
@@ -44,17 +63,34 @@ const Banner = () => {
                 YummyFood: Delightful dishes delivered fast. Order now for a
                 taste sensation that will satisfy your cravings with every bite.
               </p>
-              <button className="btn btn-active btn-secondary bg-orange-600 mr-5">
-                Get Started
-              </button>
-              <button className="btn btn-outline btn-warning">Feedback</button>
+              <br></br>
+              <Link to={"/addFood"}>
+                <button className="relative px-5 py-2  font-medium group mr-4 ml-4">
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:skew-x-[18deg]"></span>
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:-skew-x-[18deg]"></span>
+
+                  <span className="flex items-center gap-2 relative">
+                    Donate Food
+                  </span>
+                </button>
+              </Link>
+              <Link to={"/availableFoods"}>
+                <button className="relative px-5 py-2  font-medium group mr-4 ml-4">
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:skew-x-[18deg]"></span>
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:-skew-x-[18deg]"></span>
+
+                  <span className="flex items-center gap-2 relative">
+                    Request Food
+                  </span>
+                </button>
+              </Link>
             </div>
           </div>
           <div className="absolute flex justify-end transform -translate-y-1/2 left-5 right-5 bottom-0">
-            <a href="#slide1" className="btn btn-circle  bg-orange-600 mr-7">
+            <a href="#slide1" className="btn btn-circle  bg-[#32CD32] mr-7">
               ❮
             </a>
-            <a href="#slide3" className="btn btn-circle bg-orange-600 ">
+            <a href="#slide3" className="btn btn-circle bg-[#32CD32] ">
               ❯
             </a>
           </div>
@@ -73,17 +109,34 @@ const Banner = () => {
                 YummyFood: Delightful dishes delivered fast. Order now for a
                 taste sensation that will satisfy your cravings with every bite.
               </p>
-              <button className="btn btn-active btn-secondary bg-orange-600 mr-5">
-                Get Started
-              </button>
-              <button className="btn btn-outline btn-warning">Feedback</button>
+              <br></br>
+              <Link to={"/addFood"}>
+                <button className="relative px-5 py-2  font-medium group mr-4 ml-4">
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:skew-x-[18deg]"></span>
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:-skew-x-[18deg]"></span>
+
+                  <span className="flex items-center gap-2 relative">
+                    Donate Food
+                  </span>
+                </button>
+              </Link>
+              <Link to={"/availableFoods"}>
+                <button className="relative px-5 py-2  font-medium group mr-4 ml-4">
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:skew-x-[18deg]"></span>
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:-skew-x-[18deg]"></span>
+
+                  <span className="flex items-center gap-2 relative">
+                    Request Food
+                  </span>
+                </button>
+              </Link>
             </div>
           </div>
           <div className="absolute flex justify-end transform -translate-y-1/2 left-5 right-5 bottom-0">
-            <a href="#slide2" className="btn btn-circle  bg-orange-600 mr-7">
+            <a href="#slide2" className="btn btn-circle  bg-[#32CD32] mr-7">
               ❮
             </a>
-            <a href="#slide4" className="btn btn-circle  bg-orange-600">
+            <a href="#slide4" className="btn btn-circle  bg-[#32CD32]">
               ❯
             </a>
           </div>
@@ -102,17 +155,34 @@ const Banner = () => {
                 YummyFood: Delightful dishes delivered fast. Order now for a
                 taste sensation that will satisfy your cravings with every bite.
               </p>
-              <button className="btn btn-active btn-secondary bg-orange-600 mr-5">
-                Get Started
-              </button>
-              <button className="btn btn-outline btn-warning">Feedback</button>
+              <br></br>
+              <Link to={"/addFood"}>
+                <button className="relative px-5 py-2  font-medium group mr-4 ml-4">
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:skew-x-[18deg]"></span>
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:-skew-x-[18deg]"></span>
+
+                  <span className="flex items-center gap-2 relative">
+                    Donate Food
+                  </span>
+                </button>
+              </Link>
+              <Link to={"/availableFoods"}>
+                <button className="relative px-5 py-2  font-medium group mr-4 ml-4 text-center">
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform translate-x-0 -skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:skew-x-[18deg]"></span>
+                  <span className="absolute inset-0 w-full h-full transition-all duration-300 ease-out transform skew-x-[18deg] border border-[#32CD32] group-hover:border-[#32CD32] group-hover:-skew-x-[18deg]"></span>
+
+                  <span className="flex items-center gap-2 relative">
+                    Request Food
+                  </span>
+                </button>
+              </Link>
             </div>
           </div>
           <div className="absolute flex justify-end transform -translate-y-1/2 left-5 right-5 bottom-0">
-            <a href="#slide3" className="btn btn-circle bg-orange-600 mr-7">
+            <a href="#slide3" className="btn btn-circle bg-[#32CD32] mr-7">
               ❮
             </a>
-            <a href="#slide1" className="btn btn-circle  bg-orange-600">
+            <a href="#slide1" className="btn btn-circle  bg-[#32CD32]">
               ❯
             </a>
           </div>
