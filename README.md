@@ -6,34 +6,16 @@ My Website Firebase Live Link is :
 - [@YummyFood-firebase-live-link](https://yummy-food-f714c.web.app) Click Here For Visit live site.
 
 
-five bullet points features:
+bullet points features:
 
-    1. User can add food with donation amount if he wants to while he is logged in.
-
-    2. Again, the user can request food if he is logged in;
-
-    3. After a user has added a food for donation, if he feels that his food needs to be updated, he can do so..
-
-    4. After adding the food, the reserve can delete it if he feels that the food should not be served from him
-
-    5. The user can see his requested dishes in a beautiful table form.
-    6. Here users can do their work safely as their work is secured with tokens.
-
-
+       1. Separate dashboards are created for admin and normal users..
+       2. A payment system has been implemented so users can make payments through the strip.
+       3. Admin can download all data of a particular user and his/her reservations in PDF format.
 
  To run this application locally:
  
-    1. Clone the Repository:
-        First, clone client-side repository to your local machine using Git.
-     
-        git clone https://github.com/Yummy-food-client-side/your-repository.git
-        cd your-repository
-
-
-    2. Install Dependencies:
-        Once you have the repository cloned, navigate to the project directory (where package.json is located) using the terminal or command prompt.
-        Run the following command to install the necessary dependencies (this will install all libraries and packages your project needs as specified in package.json):
-        
+    1. Clone the Repository,
+    2. Install Dependencies:        
         npm install
 
     3. Add environment variables in ".env.local"
@@ -56,13 +38,10 @@ The technologies which i have used:
 
 
 
-The npm package names which i have used for the challenges task:
-1. - [@AOS-Package](https://www.npmjs.com/package/aos) This package I used to animate the Estate section of my home page.
-2. - [@React-Hook-form](https://react-hook-form.com/) I have used this package to collect data for my form. It is used in login and register pages.
-
-3. - [@Lottie-react](https://react-hook-form.com/) I have used this package to collect data for my form. It is used in login and register pages.
-
-3. - [@lottie-react](https://lottiefiles.com/free-animations/react) I have used this package in login and register pages.
-
-3. - [@lottie-react](https://lottiefiles.com/free-animations/react) I have used this package in login and register pages.
+used npm packages:
+1. - [@AOS-Package](https://www.npmjs.com/package/aos) 
+2. - [@React-Hook-form](https://react-hook-form.com/) 
+3. - [@Lottie-react](https://react-hook-form.com/)
+3. - [@lottie-react](https://lottiefiles.com/free-animations/react) 
+3. - [@lottie-react](https://lottiefiles.com/free-animations/react)
 
