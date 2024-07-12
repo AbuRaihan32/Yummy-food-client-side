@@ -8,9 +8,10 @@ My Website Firebase Live Link is :
 
 bullet points features:
 
-       1. Separate dashboards are created for admin and normal users..
-       2. A payment system has been implemented so users can make payments through the strip.
-       3. Admin can download all data of a particular user and his/her reservations in PDF format.
+       1. This site is best for those who want to donate food. Through this he will be able to donate food to the real needy people.
+       2. If someone needs food then he can request food from the available list here.
+       3. If any user faces any problem using this site or needs any help then he can solve it through live chat.
+
 
  To run this application locally:
  
@@ -27,8 +28,6 @@ bullet points features:
             VITE_APPID=1:148458561215:web:9d58d02ffbfb351838700a
     
     4. Run the Development Server:
-        After installing dependencies, you can start the development server by running:
-
         npm run start
  
  <br/>
