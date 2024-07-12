@@ -6,7 +6,7 @@ My Website Firebase Live Link is :
 - [@YummyFood-firebase-live-link](https://yummy-food-f714c.web.app) Click Here For Visit live site.
 
 
-five bullet points features and characteristics:
+five bullet points features:
 
     1. User can add food with donation amount if he wants to while he is logged in.
 
@@ -51,8 +51,8 @@ five bullet points features and characteristics:
  
  <br/>
 
-The technologies which i have used :
-   1. react.js     2. javaScript    3. tailwind    4. mongodb    5. express.js    6. node.js    7. firebase
+The technologies which i have used:
+   1. react.js     2. javaScript    3. tailwind      4. firebase    5. react-hook-form     6. react-router-dom    7. tanstack query
 
 
 
